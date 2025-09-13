@@ -60,16 +60,16 @@ export function GrowthGraph({ onBack }: GrowthGraphProps) {
         <Card className="bg-white shadow-lg rounded-3xl overflow-hidden border-0">
           <CardContent className="p-8">
             <h3 className="text-lg text-gray-700 mb-6 text-center">키 성장 그래프 (cm)</h3>
-            <div className="relative h-64 mb-4">
-              <svg width="100%" height="100%" viewBox="0 0 800 240" className="overflow-visible">
+            <div className="relative h-80 md:h-96 mb-4">
+              <svg width="100%" height="100%" viewBox="0 0 800 320" className="overflow-visible">
                 {/* Grid lines */}
                 {[0, 1, 2, 3, 4].map(i => (
                   <line
                     key={i}
                     x1="60"
-                    y1={40 + i * 40}
+                    y1={40 + i * 60}
                     x2="740"
-                    y2={40 + i * 40}
+                    y2={40 + i * 60}
                     stroke="#f0f0f0"
                     strokeWidth="1"
                   />
@@ -80,7 +80,7 @@ export function GrowthGraph({ onBack }: GrowthGraphProps) {
                   <text
                     key={value}
                     x="50"
-                    y={48 + i * 40}
+                    y={48 + i * 60}
                     textAnchor="end"
                     fontSize="12"
                     fill="#666"
@@ -92,7 +92,7 @@ export function GrowthGraph({ onBack }: GrowthGraphProps) {
                 {/* Line chart */}
                 <polyline
                   points={growthData.map((d, i) =>
-                    `${80 + i * 50},${200 - ((d.height - 40) / 40) * 160}`
+                    `${80 + i * 70},${280 - ((d.height - 40) / 40) * 240}`
                   ).join(' ')}
                   fill="none"
                   stroke="#3b82f6"
@@ -105,18 +105,18 @@ export function GrowthGraph({ onBack }: GrowthGraphProps) {
                 {growthData.map((d, i) => (
                   <g key={i}>
                     <circle
-                      cx={80 + i * 50}
-                      cy={200 - ((d.height - 40) / 40) * 160}
+                      cx={80 + i * 70}
+                      cy={280 - ((d.height - 40) / 40) * 240}
                       r="4"
                       fill="#3b82f6"
                     />
                     <text
-                      x={80 + i * 50}
-                      y={220}
+                      x={80 + i * 70}
+                      y={300}
                       textAnchor="middle"
                       fontSize="10"
                       fill="#666"
-                      transform={`rotate(-45, ${80 + i * 50}, 220)`}
+                      transform={`rotate(-45, ${80 + i * 70}, 300)`}
                     >
                       {d.month}
                     </text>
@@ -131,16 +131,16 @@ export function GrowthGraph({ onBack }: GrowthGraphProps) {
         <Card className="bg-white shadow-lg rounded-3xl overflow-hidden border-0">
           <CardContent className="p-8">
             <h3 className="text-lg text-gray-700 mb-6 text-center">몸무게 성장 그래프 (kg)</h3>
-            <div className="relative h-64 mb-4">
-              <svg width="100%" height="100%" viewBox="0 0 800 240" className="overflow-visible">
+            <div className="relative h-80 md:h-96 mb-4">
+              <svg width="100%" height="100%" viewBox="0 0 800 320" className="overflow-visible">
                 {/* Grid lines */}
                 {[0, 1, 2, 3, 4].map(i => (
                   <line
                     key={i}
                     x1="60"
-                    y1={40 + i * 40}
+                    y1={40 + i * 60}
                     x2="740"
-                    y2={40 + i * 40}
+                    y2={40 + i * 60}
                     stroke="#f0f0f0"
                     strokeWidth="1"
                   />
@@ -151,7 +151,7 @@ export function GrowthGraph({ onBack }: GrowthGraphProps) {
                   <text
                     key={value}
                     x="50"
-                    y={48 + i * 40}
+                    y={48 + i * 60}
                     textAnchor="end"
                     fontSize="12"
                     fill="#666"
@@ -163,7 +163,7 @@ export function GrowthGraph({ onBack }: GrowthGraphProps) {
                 {/* Line chart */}
                 <polyline
                   points={growthData.map((d, i) =>
-                    `${80 + i * 50},${200 - (d.weight / 12) * 160}`
+                    `${80 + i * 70},${280 - (d.weight / 12) * 240}`
                   ).join(' ')}
                   fill="none"
                   stroke="#10b981"
@@ -176,18 +176,18 @@ export function GrowthGraph({ onBack }: GrowthGraphProps) {
                 {growthData.map((d, i) => (
                   <g key={i}>
                     <circle
-                      cx={80 + i * 50}
-                      cy={200 - (d.weight / 12) * 160}
+                      cx={80 + i * 70}
+                      cy={280 - (d.weight / 12) * 240}
                       r="4"
                       fill="#10b981"
                     />
                     <text
-                      x={80 + i * 50}
-                      y={220}
+                      x={80 + i * 70}
+                      y={300}
                       textAnchor="middle"
                       fontSize="10"
                       fill="#666"
-                      transform={`rotate(-45, ${80 + i * 50}, 220)`}
+                      transform={`rotate(-45, ${80 + i * 70}, 300)`}
                     >
                       {d.month}
                     </text>
