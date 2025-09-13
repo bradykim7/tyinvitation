@@ -3,70 +3,79 @@ import { Button } from "./ui/button";
 import { ArrowLeft, Heart } from "lucide-react";
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
-interface PhotoAlbumProps {
-  onBack: () => void;
+interface Photo {
+  id: number;
+  src: string;
+  caption: string;
+  month: string;
 }
 
-export function PhotoAlbum({ onBack }: PhotoAlbumProps) {
+interface PhotoAlbumProps {
+  onBack: () => void;
+  onPhotoClick: (photo: Photo) => void;
+}
+
+export function PhotoAlbum({ onBack, onPhotoClick }: PhotoAlbumProps) {
+
   const photos = [
     {
       id: 1,
       src: "/album/2412.JPG",
-      caption: "첫 번째 미소",
+      caption: "12월의 루돌프 태윤이",
       month: "12월"
     },
     {
       id: 2,
       src: "/album/2501.jpeg",
-      caption: "평화로운 잠",
+      caption: "아빠 와 아들 ?!",
       month: "1월"
     },
     {
       id: 3,
       src: "/album/2502.jpeg",
-      caption: "장난감과 놀기",
+      caption: "청룡의 해, 태윤이!",
       month: "2월"
     },
     {
       id: 4,
       src: "/album/2503.jpeg",
-      caption: "웃음소리",
+      caption: "백일 파티",
       month: "3월"
     },
     {
       id: 5,
       src: "/album/2504.jpeg",
-      caption: "혼자 앉기",
+      caption: "곰돌이 푸 보다 귀여운 태윤이",
       month: "4월"
     },
     {
       id: 6,
       src: "/album/2505.mp4",
-      caption: "이유식 시작",
+      caption: "살인 미소 태윤",
       month: "5월"
     },
     {
       id: 7,
       src: "/album/2506.jpeg",
-      caption: "블록 쌓기",
+      caption: "맘마 더주세요.",
       month: "6월"
     },
     {
       id: 8,
       src: "/album/2507.jpeg",
-      caption: "기어다니기 시작",
+      caption: "첫 물놀이",
       month: "7월"
     },
     {
       id: 9,
       src: "/album/2508.jpeg",
-      caption: "붙잡고 서기",
+      caption: "엄마랑 백화점 나들이",
       month: "8월"
     },
     {
       id: 10,
       src: "/album/2509.mp4",
-      caption: "첫 걸음마",
+      caption: "살인 미소2",
       month: "9월"
     },
     {
@@ -112,19 +121,24 @@ export function PhotoAlbum({ onBack }: PhotoAlbumProps) {
               <CardContent className="p-0">
                 <div className="aspect-square overflow-hidden">
                   {photo.src.endsWith('.mp4') || photo.src.endsWith('.mov') ? (
-                    <video
-                      src={photo.src}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                      controls
-                      muted
-                      loop
-                      playsInline
-                    />
+                    <div
+                      className="relative w-full h-full cursor-pointer"
+                      onClick={() => onPhotoClick(photo)}
+                    >
+                      <video
+                        src={photo.src}
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300 pointer-events-none"
+                        muted
+                        loop
+                        playsInline
+                      />
+                    </div>
                   ) : (
                     <ImageWithFallback
                       src={photo.src}
                       alt={photo.caption}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300 cursor-pointer"
+                      onClick={() => onPhotoClick(photo)}
                     />
                   )}
                 </div>
@@ -142,43 +156,8 @@ export function PhotoAlbum({ onBack }: PhotoAlbumProps) {
           ))}
         </div>
 
-        {/* Album Stats */}
-        <Card className="bg-white shadow-md rounded-2xl border-0 mt-8 mb-8">
-          <CardContent className="p-6 text-center">
-            <h3 className="text-lg text-gray-700 mb-4">첫 번째 해 통계</h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div>
-                <p className="text-2xl text-gray-800 mb-1">365</p>
-                <p className="text-sm text-gray-600">소중한 날들</p>
-              </div>
-              <div>
-                <p className="text-2xl text-gray-800 mb-1">12</p>
-                <p className="text-sm text-gray-600">개월의 성장</p>
-              </div>
-              <div>
-                <p className="text-2xl text-gray-800 mb-1">∞</p>
-                <p className="text-sm text-gray-600">행복한 순간</p>
-              </div>
-              <div>
-                <p className="text-2xl text-gray-800 mb-1">1</p>
-                <p className="text-sm text-gray-600">특별한 생일</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Thank You Message */}
-        <div className="text-center">
-          <Card className="bg-white shadow-md rounded-2xl border-0 inline-block">
-            <CardContent className="p-8">
-              <p className="text-gray-600 mb-4">
-                함께해주신 모든 분들께 감사드립니다
-              </p>
-              <div className="text-2xl">💕</div>
-            </CardContent>
-          </Card>
-        </div>
       </div>
+
     </div>
   );
 }
